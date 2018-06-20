@@ -1,5 +1,7 @@
 # HTTP Status
 
+![Travis build status](https://travis-ci.org/marcandreappel/http_status.svg?branch=master)
+
 ## Usage
 
 ```php
