@@ -31,6 +31,6 @@ class HeaderSentExceptionTest extends TestCase
 	public function thrown_exception_returns_message()
 	{
 		$this->expectException("MarcAndreAppel\HttpStatus\Exceptions\HeaderSentException");
-		$test = $this->dummyClass->throwError("Error message");
+		$this->dummyClass->throwError("Error message");
 	}
 }
