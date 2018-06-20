@@ -38,21 +38,21 @@ class HttpStatusTest extends TestCase
 	/** @test */
 	public function returns_an_object()
 	{
-		$return = $this->traitClass->httpCode(100);
+		$return = $this->traitClass->httpStatusCode(100);
 		$this->assertInternalType('object', $return, "Returned value must be an object");
 	}
 
 	/** @test */
 	public function returned_object_is_instance_of()
 	{
-		$return = $this->traitClass->httpCode(100);
+		$return = $this->traitClass->httpStatusCode(100);
 		$this->assertInstanceOf(HttpStatus::class, $return, "Object must be type of 'HttpStatusModel'");
 	}
 
 	/** @test */
 	public function returned_object_contains_statusCode()
 	{
-		$return = $this->traitClass->httpCode(100);
+		$return = $this->traitClass->httpStatusCode(100);
 		$this->assertObjectHasAttribute('code', $return, "Contains the attribute 'statusCode'");
 	}
 
@@ -60,14 +60,14 @@ class HttpStatusTest extends TestCase
 	public function attribute_statusCode_contains_value()
 	{
 		$code = 302;
-		$return = $this->traitClass->httpCode($code);
+		$return = $this->traitClass->httpStatusCode($code);
 		$this->assertEquals($code, $return->code, "Attribute value equals $code");
 	}
 
 	/** @test */
 	public function returned_object_contains_attributes()
 	{
-		$return = $this->traitClass->httpCode(100);
+		$return = $this->traitClass->httpStatusCode(100);
 		$this->assertObjectHasAttribute('message', $return, "Contains the attribute 'message'");
 		$this->assertObjectHasAttribute('title', $return, "Contains the attribute 'title'");
 	}
@@ -76,7 +76,7 @@ class HttpStatusTest extends TestCase
 	public function object_accepts_overriding_argument_message()
 	{
 		$message = "Overriding message";
-		$return = $this->traitClass->httpCode(100, array("message" => $message));
+		$return = $this->traitClass->httpStatusCode(100, array("message" => $message));
 		$this->assertEquals($message, $return->message, "Second argument in array → key 'message' gets returned as attribute");
 	}
 
@@ -84,17 +84,17 @@ class HttpStatusTest extends TestCase
 	public function object_accepts_overriding_argument_title()
 	{
 		$title = "BAD REQUEST TITLE";
-		$return = $this->traitClass->httpCode(400, array("title" => $title));
+		$return = $this->traitClass->httpStatusCode(400, array("title" => $title));
 		$this->assertEquals($title, $return->title, "Second argument in array → key 'title' gets returned as attribute");
 	}
 
 	/** @test */
 	public function object_returns_correct_defaults()
 	{
-		$return = $this->traitClass->httpCode(100);
+		$return = $this->traitClass->httpStatusCode(100);
 		$this->assertEquals('Continue', $return->title, "Returns the value 'Continue' for the code 100");
 
-		$return = $this->traitClass->httpCode(404);
+		$return = $this->traitClass->httpStatusCode(404);
 		$this->assertEquals('Not Found', $return->title, "Returns the value 'Not Found' for error code 404");
 	}
 
@@ -102,20 +102,20 @@ class HttpStatusTest extends TestCase
 	public function object_throws_error_with_wrong_parameter()
 	{
 		$this->expectException(\OutOfBoundsException::class);
-		$this->traitClass->httpCode(600);
+		$this->traitClass->httpStatusCode(600);
 	}
 
 	/** @test */
 	public function object_throws_error_with_no_parameter()
 	{
 		$this->expectException(\InvalidArgumentException::class);
-		$this->traitClass->httpCode();
+		$this->traitClass->httpStatusCode();
 	}
 
 	/** @test */
 	public function returns_title_but_empty_message()
 	{
-		$return = $this->traitClass->httpCode(100);
+		$return = $this->traitClass->httpStatusCode(100);
 		$this->assertEquals("Continue", $return->title);
 		$this->assertNull($return->message);
 	}
@@ -124,6 +124,6 @@ class HttpStatusTest extends TestCase
 	public function phpunit_test_throws_exception_header_method()
 	{
 		$this->expectException("MarcAndreAppel\HttpStatus\Exceptions\HeaderSentException");
-		$this->traitClass->httpCode(404)->header();
+		$this->traitClass->httpStatusCode(404)->header();
 	}
 }

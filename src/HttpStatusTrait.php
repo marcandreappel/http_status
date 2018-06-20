@@ -13,7 +13,7 @@ namespace MarcAndreAppel\HttpStatus;
 
 trait HttpStatusTrait
 {
-	public function httpCode(int $code = null, array $args = null): object
+	public function httpStatusCode(int $code = null, array $args = null): object
 	{
 		$httpStatus = new HttpStatus($code);
 		$httpStatus->code = $code;
